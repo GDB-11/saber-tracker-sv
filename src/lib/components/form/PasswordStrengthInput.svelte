@@ -1,4 +1,4 @@
-<!-- lib/components/form/PasswordInput.svelte -->
+<!-- src\lib\components\form\PasswordStrengthInput.svelte -->
 <script lang="ts">
     import EyeOnSvg from '../svg/EyeOnSvg.svelte';
     import EyeOffSvg from '../svg/EyeOffSvg.svelte';

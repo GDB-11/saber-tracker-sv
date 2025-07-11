@@ -1,3 +1,4 @@
+<!-- src\lib\components\svg\EyeOnSvg.svelte -->
 <script>
 	let { class: className = '' } = $props();
 </script>

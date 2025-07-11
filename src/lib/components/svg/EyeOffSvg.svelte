@@ -1,3 +1,4 @@
+<!-- src\lib\components\svg\EyeOffSvg.svelte -->
 <script>
 	let {
 		class: className = ''
