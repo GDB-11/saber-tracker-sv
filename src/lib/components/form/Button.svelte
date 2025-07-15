@@ -57,12 +57,10 @@
 			'bg-red-600 hover:bg-red-700 text-white border-transparent focus:ring-red-500 dark:bg-red-700 dark:hover:bg-red-600 dark:text-white',
 
 		// Financial buy action - Enhanced green
-		buy:
-			'bg-green-500 hover:bg-green-600 text-white border-transparent focus:ring-green-500 font-semibold dark:bg-green-600 dark:hover:bg-green-500 dark:text-white',
+		buy: 'bg-green-500 hover:bg-green-600 text-white border-transparent focus:ring-green-500 font-semibold dark:bg-green-600 dark:hover:bg-green-500 dark:text-white',
 
 		// Financial sell action - Enhanced red
-		sell:
-			'bg-red-500 hover:bg-red-600 text-white border-transparent focus:ring-red-500 font-semibold dark:bg-red-600 dark:hover:bg-red-500 dark:text-white',
+		sell: 'bg-red-500 hover:bg-red-600 text-white border-transparent focus:ring-red-500 font-semibold dark:bg-red-600 dark:hover:bg-red-500 dark:text-white',
 
 		// Outline variant with primary color
 		outline:
