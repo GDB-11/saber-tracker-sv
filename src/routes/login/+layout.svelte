@@ -173,15 +173,6 @@
 
 				<!-- Additional links -->
 				<div class="mt-6 space-y-2 text-center">
-					<p class="text-sm text-slate-600 dark:text-slate-400">
-						Don't have an account?
-						<a
-							href="/register"
-							class="font-medium text-cyan-600 transition-colors hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
-						>
-							Sign up here
-						</a>
-					</p>
 					<p class="text-xs text-slate-500 dark:text-slate-500">
 						<a
 							href="/privacy"

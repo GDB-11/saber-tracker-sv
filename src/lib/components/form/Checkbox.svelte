@@ -43,11 +43,11 @@
 				: variant;
 
 	const baseClasses: string =
-		'form-checkbox h-5 w-5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed';
+		'form-checkbox h-5 w-5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed rounded-sm';
 
 	const variantClasses: Record<CheckboxVariant, string> = {
 		default:
-			'text-cyan-600 focus:ring-cyan-500 border-gray-300 dark:text-cyan-400 dark:focus:ring-cyan-400 dark:border-gray-700',
+			'text-cyan-600 focus:ring-cyan-500 border-gray-300 dark:text-cyan-400 dark:focus:ring-cyan-400 dark:border-gray-700 ',
 		success:
 			'text-green-600 focus:ring-green-500 border-green-400 dark:text-green-400 dark:focus:ring-green-400 dark:border-green-600',
 		warning:

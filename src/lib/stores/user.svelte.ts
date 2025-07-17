@@ -1,4 +1,4 @@
-// userStore.svelte.ts
+// src/lib/stores/user.svelte.ts
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 
@@ -42,12 +42,19 @@ const MOCK_USERS: User[] = [
     }
 ];
 
+// localStorage keys
+const STORAGE_KEYS = {
+    USER: 'user',
+    AUTH_TOKEN: 'auth_token',
+    REMEMBERED_CREDENTIALS: 'remembered_credentials'
+} as const;
+
 // Initialize user state from localStorage if available
 function initializeUser(): User | null {
     if (!browser) return null;
 
     try {
-        const stored = localStorage.getItem('user');
+        const stored = localStorage.getItem(STORAGE_KEYS.USER);
         return stored ? JSON.parse(stored) : null;
     } catch {
         return null;
@@ -57,7 +64,7 @@ function initializeUser(): User | null {
 // Reactive user state
 export const user = $state<{ current: User | null; token: string | null }>({
     current: initializeUser(),
-    token: browser ? localStorage.getItem('auth_token') : null
+    token: browser ? localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN) : null
 });
 
 // Derived state for logged in status
@@ -71,6 +78,37 @@ export function getCurrentUser(): User | null {
 // Get logged in status (for use in components)
 export function getLoggedIn(): boolean {
     return isLoggedIn();
+}
+
+// Remember me functionality
+export function saveRememberedCredentials(usernameOrEmail: string): void {
+    if (!browser) return;
+    
+    try {
+        localStorage.setItem(STORAGE_KEYS.REMEMBERED_CREDENTIALS, usernameOrEmail);
+    } catch (error) {
+        console.warn('Failed to save remembered credentials:', error);
+    }
+}
+
+export function getRememberedCredentials(): string | null {
+    if (!browser) return null;
+    
+    try {
+        return localStorage.getItem(STORAGE_KEYS.REMEMBERED_CREDENTIALS);
+    } catch {
+        return null;
+    }
+}
+
+export function clearRememberedCredentials(): void {
+    if (!browser) return;
+    
+    try {
+        localStorage.removeItem(STORAGE_KEYS.REMEMBERED_CREDENTIALS);
+    } catch (error) {
+        console.warn('Failed to clear remembered credentials:', error);
+    }
 }
 
 // Mock API call to simulate login
@@ -137,7 +175,11 @@ async function mockLoginAPI(usernameOrEmail: string, password: string): Promise<
 }
 
 // Login function
-export async function login(usernameOrEmail: string, password: string): Promise<LoginResponse> {
+export async function login(
+    usernameOrEmail: string, 
+    password: string, 
+    rememberMe: boolean = false
+): Promise<LoginResponse> {
     try {
         const response = await mockLoginAPI(usernameOrEmail, password);
 
@@ -148,8 +190,15 @@ export async function login(usernameOrEmail: string, password: string): Promise<
 
             // Persist to localStorage
             if (browser) {
-                localStorage.setItem('user', JSON.stringify(response.user));
-                localStorage.setItem('auth_token', response.token);
+                localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(response.user));
+                localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, response.token);
+            }
+
+            // Handle remember me functionality
+            if (rememberMe) {
+                saveRememberedCredentials(usernameOrEmail.trim());
+            } else {
+                clearRememberedCredentials();
             }
 
             // Redirect to dashboard after successful login
@@ -173,10 +222,12 @@ export function logout(): void {
     user.current = null;
     user.token = null;
 
-    // Clear localStorage
+    // Clear localStorage (but keep remembered credentials if they exist)
     if (browser) {
-        localStorage.removeItem('user');
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem(STORAGE_KEYS.USER);
+        localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+        // Note: We don't clear remembered credentials here
+        // They should persist until user unchecks "remember me" or clears browser data
     }
 
     // Redirect to login page
@@ -212,8 +263,8 @@ export function initializeAuth(): void {
     if (!browser) return;
 
     // Validate stored token (in real app, this would make an API call)
-    const storedToken = localStorage.getItem('auth_token');
-    const storedUser = localStorage.getItem('user');
+    const storedToken = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+    const storedUser = localStorage.getItem(STORAGE_KEYS.USER);
 
     if (storedToken && storedUser) {
         try {
@@ -222,8 +273,8 @@ export function initializeAuth(): void {
             user.token = storedToken;
         } catch {
             // Clear invalid data
-            localStorage.removeItem('user');
-            localStorage.removeItem('auth_token');
+            localStorage.removeItem(STORAGE_KEYS.USER);
+            localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
         }
     }
 }

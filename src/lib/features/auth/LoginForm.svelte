@@ -4,15 +4,27 @@
 	import Checkbox from '$lib/components/form/Checkbox.svelte';
 	import FormGroup from '$lib/components/form/FormGroup.svelte';
 	import Input from '$lib/components/form/Input.svelte';
+	import PasswordInput from '$lib/components/form/PasswordInput.svelte';
 	import Link from '$lib/components/ui/Link.svelte';
-	import { login, type LoginResponse } from '$lib/stores/user.svelte';
+	import { login, type LoginResponse, getRememberedCredentials } from '$lib/stores/user.svelte';
+	import { onMount } from 'svelte';
 
 	// Form state
 	let usernameOrEmail = $state('');
 	let password = $state('');
+	let rememberMe = $state(false);
 	let loading = $state(false);
 	let error = $state('');
 	let success = $state(false);
+
+	// Load remembered credentials on component mount
+	onMount(() => {
+		const rememberedCredentials = getRememberedCredentials();
+		if (rememberedCredentials) {
+			usernameOrEmail = rememberedCredentials;
+			rememberMe = true;
+		}
+	});
 
 	// Validation state
 	let touched = $state({ usernameOrEmail: false, password: false });
@@ -47,7 +59,7 @@
 		loading = true;
 
 		try {
-			const response = await login(usernameOrEmail.trim(), password);
+			const response = await login(usernameOrEmail.trim(), password, rememberMe);
 
 			if (response.success) {
 				success = true;
@@ -105,9 +117,8 @@
 
 		<!-- Password Input -->
 		<div>
-			<Input
+			<PasswordInput
 				label="Password"
-				type="password"
 				bind:value={password}
 				required
 				disabled={loading}
@@ -123,18 +134,13 @@
 
 		<!-- Remember me and Forgot password -->
 		<div class="flex items-center justify-between">
-			<div class="flex items-center">
-				<input
-					id="remember-me"
-					name="remember-me"
-					type="checkbox"
-					class="h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700"
-					disabled={loading}
-				/>
-				<label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
-					Remember me
-				</label>
-			</div>
+			<Checkbox
+				bind:checked={rememberMe}
+				label="Remember me"
+				id="remember-me"
+				disabled={loading}
+				class="h-4 w-4"
+			/>
 
 			<div class="text-sm">
 				<Link text={'Forgot your password?'} href={'/forgot-password'} disabled={loading} />
