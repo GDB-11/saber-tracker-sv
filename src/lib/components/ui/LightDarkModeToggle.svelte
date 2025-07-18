@@ -42,6 +42,7 @@
     relative inline-flex items-center rounded-full
     transition-all duration-300 ease-in-out
     focus:ring-2 focus:ring-offset-2 focus:outline-none
+	cursor-pointer
     ${currentSize.container}
     ${themeStore.isDark ? 'bg-cyan-900 focus:ring-cyan-800' : 'bg-cyan-600 focus:ring-cyan-300'}
     ${className}
