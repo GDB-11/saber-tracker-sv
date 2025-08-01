@@ -90,9 +90,6 @@
 		touched.usernameOrEmail && usernameOrEmail.trim().length === 0
 	);
 	const showPasswordError = $derived(touched.password && password.length === 0);
-
-	// Demo credentials helper
-	let showDemoCredentials = $state(false);
 </script>
 
 <!-- Login Form -->
