@@ -95,61 +95,6 @@
 					Saber Tracker
 				</h1>
 			</div>
-
-			<!-- Portfolio Selector -->
-			<div class="dropdown-container relative hidden md:block">
-				<button
-					type="button"
-					onclick={togglePortfolioDropdown}
-					class="flex items-center space-x-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-				>
-					<div class="text-left">
-						<div class="text-sm font-medium text-gray-900 dark:text-white">
-							{navigationStore.activePortfolio?.name || 'All Portfolios'}
-						</div>
-						{#if navigationStore.activePortfolio}
-							<div class="text-xs text-gray-500 dark:text-gray-400">
-								{formatCurrency(
-									navigationStore.activePortfolio.value,
-									navigationStore.activePortfolio.currency
-								)}
-							</div>
-						{/if}
-					</div>
-					<ChevronDownIcon class="h-4 w-4 text-gray-500 dark:text-gray-400" />
-				</button>
-
-				<!-- Portfolio Dropdown -->
-				{#if showPortfolioDropdown}
-					<div
-						class="absolute top-full left-0 z-50 mt-2 w-64 rounded-lg border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
-					>
-						<div class="p-2">
-							<button
-								type="button"
-								onclick={() => selectPortfolio(null)}
-								class="w-full rounded-md px-3 py-2 text-left transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-							>
-								<div class="font-medium text-gray-900 dark:text-white">All Portfolios</div>
-								<div class="text-sm text-gray-500 dark:text-gray-400">View combined data</div>
-							</button>
-							<hr class="my-2 border-gray-200 dark:border-gray-700" />
-							{#each navigationStore.portfolios as portfolio}
-								<button
-									type="button"
-									onclick={() => selectPortfolio(portfolio)}
-									class="w-full rounded-md px-3 py-2 text-left transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-								>
-									<div class="font-medium text-gray-900 dark:text-white">{portfolio.name}</div>
-									<div class="text-sm text-gray-500 dark:text-gray-400">
-										{formatCurrency(portfolio.value, portfolio.currency)}
-									</div>
-								</button>
-							{/each}
-						</div>
-					</div>
-				{/if}
-			</div>
 		</div>
 
 		<!-- Center: Search -->

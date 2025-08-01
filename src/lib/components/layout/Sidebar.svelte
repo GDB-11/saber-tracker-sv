@@ -82,7 +82,7 @@
 		{/if}
 
 		<!-- Navigation Menu -->
-		<nav class="flex-1 space-y-2 overflow-y-auto p-4">
+		<nav class="flex-1 space-y-2 overflow-y-auto py-4 px-4 lg:px-6">
 			{#each navigationStore.menuItems as item}
 				{@const IconComponent = iconComponents[item.icon]}
 				{@const isActive = isActiveItem(item)}
