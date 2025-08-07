@@ -160,9 +160,9 @@ function createNavigationStore() {
         notifications = [...notifications, notification];
 
         // Auto-remove after 5 seconds
-        setTimeout(() => {
-            removeNotification(notification.id);
-        }, 5000);
+        // setTimeout(() => {
+        //     removeNotification(notification.id);
+        // }, 5000);
     };
 
     const removeNotification = (id: string) => {

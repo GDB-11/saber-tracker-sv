@@ -41,7 +41,7 @@
 	// Determine if an item is active based on current route
 	const isActiveItem = (item: any) => {
 		const currentPath = page.url.pathname;
-		return currentPath.startsWith(item.href) || item.id === navigationStore.activeItem;
+		return currentPath.startsWith(item.href);
 	};
 </script>
 
@@ -49,10 +49,7 @@
 {#if navigationStore.isMobile && navigationStore.isOpen}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
-		class="fixed inset-0 z-40 bg-black/40 lg:hidden"
-		onclick={handleBackdropClick}
-	></div>
+	<div class="fixed inset-0 z-40 bg-black/40 lg:hidden" onclick={handleBackdropClick}></div>
 {/if}
 
 <!-- Sidebar -->
@@ -82,7 +79,9 @@
 		{/if}
 
 		<!-- Navigation Menu -->
-		<nav class="flex-1 space-y-2 overflow-y-auto py-4 px-4 lg:px-6">
+		<nav
+			class={`flex-1 space-y-2 overflow-y-auto px-4 py-4 ${!navigationStore.isMobile && !navigationStore.isOpen ? 'lg:pr-3 lg:pl-6' : 'lg:p-6'}`}
+		>
 			{#each navigationStore.menuItems as item}
 				{@const IconComponent = iconComponents[item.icon]}
 				{@const isActive = isActiveItem(item)}
