@@ -8,10 +8,7 @@
 </script>
 
 <svg class={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-	<path
-		stroke-linecap="round"
-		stroke-linejoin="round"
-		stroke-width="2"
-		d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0H8m0 0H4a2 2 0 00-2 2v6a2 2 0 002 2h2m2-6a2 2 0 012-2h4a2 2 0 012 2v6a2 2 0 01-2 2h-4a2 2 0 01-2-2V10z"
-	/>
+	<rect x="3" y="7" width="18" height="13" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M8 7V5a4 4 0 0 1 8 0v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M3 13h18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
