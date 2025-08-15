@@ -12,6 +12,7 @@
 		stroke-linecap="round"
 		stroke-linejoin="round"
 		stroke-width="2"
-		d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a1 1 0 01-1-1V9a1 1 0 011-1h1a2 2 0 100-4H4a1 1 0 01-1-1V4a1 1 0 011-1h3a1 1 0 001-1v-1a2 2 0 114 0z"
+		d="M15.232 5.232a4 4 0 0 1 5.656 5.656l-4.95 4.95a2 2 0 0 1-2.828 0l-1.414-1.414a2 2 0 0 1 0-2.828l4.95-4.95zm-7.07 7.07a2 2 0 0 0 0 2.828l1.414 1.414a2 2 0 0 0 2.828 0l.586-.586"
 	/>
+	<circle cx="7" cy="17" r="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
